@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lineup</title>
+<meta name="description" content="Track every show, see who's going, find your way to a ticket.">
+<style>
+:root {
+  --bg: #121110;
+  --card: #1A1917;
+  --border: #26241f;
+  --text: #F4F1EC;
+  --muted: #8E8983;
+  --accent: #F0C24C;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  margin: 2.5rem 0 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 1.5rem 0 0.4rem;
+  color: var(--accent);
+}
+
+p, li { color: var(--text); }
+
+ul { padding-left: 1.25rem; }
+li { margin: 0.4rem 0; }
+
+a { color: var(--accent); }
+a:hover { text-decoration: none; }
+
+strong { color: #fff; }
+
+.updated,
+.back {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.updated { margin: 0 0 2.5rem; }
+.back { margin: 0 0 2rem; }
+
+/* Landing page */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mark {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.mark span {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  background: #14130A;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 26rem;
+  margin: 0.5rem 0 2rem;
+}
+
+.soon {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+
+.links a { margin-right: 1.5rem; }
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div class="mark"><span></span></div>
+    <h1>Lineup</h1>
+    <p class="tagline">Track every show, see who&rsquo;s going, find your way to a ticket.</p>
+    <p><span class="soon">Coming soon to iOS</span></p>
+    <!-- Once the app is live, replace the badge above with a link to
+         https://apps.apple.com/app/id6808850418 — and set INSTALL_URL in
+         src/utils/inviteLink.ts to this page, so invite links stop needing
+         a code change every time this moves. -->
+  </div>
+
+  <p class="links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </p>
+
+  <footer>
+    <p>Questions? <a href="mailto:lineup@kingsleyszeto.me">lineup@kingsleyszeto.me</a></p>
+  </footer>
+</main>
+</body>
+</html>
