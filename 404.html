@@ -4,15 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lineup</title>
-<meta name="description" content="Track every show, see who's going, find your way to a ticket.">
-<!-- GitHub Pages serves this page for every path that isn't a real file,
-     which is how /invite/<id> gets answered at all: those ids are created
-     per invite, so no static file can exist for them.
-
-     Anyone landing here on an /invite/ URL has an invite but NOT the app —
-     iOS hands the link straight to Lineup when it's installed and never
-     reaches the web (see .well-known/apple-app-site-association). So this
-     page's job is to explain where to get it, not to redeem anything. -->
 <style>
 :root {
   --bg: #121110;
@@ -47,97 +38,83 @@ h1 {
   margin: 0 0 0.5rem;
 }
 
+h2 {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  margin: 2.5rem 0 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 1.5rem 0 0.4rem;
+  color: var(--accent);
+}
+
+p, li { color: var(--text); }
+
+ul { padding-left: 1.25rem; }
+li { margin: 0.4rem 0; }
+
 a { color: var(--accent); }
 a:hover { text-decoration: none; }
 
-.hero {
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+strong { color: #fff; }
 
-.mark {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.75rem;
-}
-
-.mark span {
-  width: 22px;
-  height: 22px;
-  border-radius: 8px;
-  background: #14130A;
-}
-
-.tagline {
-  color: var(--muted);
-  font-size: 1.05rem;
-  max-width: 26rem;
-  margin: 0.5rem 0 2rem;
-}
-
-.soon {
-  display: inline-block;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  margin-bottom: 2.5rem;
-}
-
-footer {
-  margin-top: 4rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
+.updated,
+.back {
   color: var(--muted);
   font-size: 0.875rem;
 }
+
+.updated { margin: 0 0 2.5rem; }
+.back { margin: 0 0 2rem; }
+</style>
+<style>
+  main { max-width: 32rem; }
+  .mark { width: 56px; height: 56px; border-radius: 14px; background: var(--accent);
+          display: flex; align-items: center; justify-content: center; margin-bottom: 1.75rem; }
+  .mark span { width: 22px; height: 22px; border-radius: 8px; background: #14130A; }
+  .soon { display:inline-block; border:1px solid var(--border); background: var(--card);
+          color: var(--muted); border-radius:999px; padding:.4rem .9rem; font-size:.8rem;
+          letter-spacing:.04em; text-transform:uppercase; }
+  .hidden { display: none; }
 </style>
 </head>
 <body>
 <main>
-  <div class="hero">
-    <div class="mark"><span></span></div>
+  <div class="mark"><span></span></div>
 
-    <!-- Defaults to the not-found copy, so the page still says something
-         true with JavaScript disabled. The invite wording is swapped in
-         below only when the path actually is an invite. -->
-    <h1 id="title">Page not found</h1>
-    <p class="tagline" id="tagline">
-      That link doesn&rsquo;t go anywhere. <a href="/">Head to the Lineup home page</a> instead.
-    </p>
+  <!-- Someone opened an invite link without the app. iOS hands the URL to
+       Lineup when it is installed (see /.well-known/apple-app-site-association);
+       this page is what the same URL does for everyone else, which is the whole
+       reason invites use a real web address rather than a lineup:// scheme
+       that silently did nothing. -->
+  <div id="invite" class="hidden">
+    <h1>You've been invited to Lineup</h1>
+    <p>Lineup is a way to keep track of the shows you're going to and see which of
+    your friends are going to the same ones.</p>
+    <p>You'll need the app to accept this invite. Open this link again once you have
+    it and you'll be connected automatically.</p>
+    <p><span class="soon">Coming soon to iOS</span></p>
+  </div>
 
-    <p id="cta" hidden>
-      <span class="soon">Coming soon to iOS</span>
-      <!-- Launch day: replace this badge with a link to
-           https://apps.apple.com/app/id6808850418. Nothing in the app needs
-           to change — invite links already point here. -->
-    </p>
+  <div id="generic" class="hidden">
+    <h1>Page not found</h1>
+    <p>That link doesn't lead anywhere on this site.</p>
+    <p><a href="/">Go to thelineup.app</a></p>
   </div>
 
   <footer>
-    <p>Questions? <a href="mailto:lineup@kingsleyszeto.me">lineup@kingsleyszeto.me</a></p>
+    <p><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms of Service</a></p>
   </footer>
 </main>
-
 <script>
-  if (location.pathname.indexOf('/invite/') === 0) {
-    document.getElementById('title').textContent = 'You’ve been invited to Lineup';
-    document.getElementById('tagline').innerHTML =
-      'Track every show, see who&rsquo;s going, find your way to a ticket. ' +
-      'Get the app, then open your invite link again to add your friend.';
-    document.getElementById('cta').hidden = false;
-  }
+  // GitHub Pages serves this file for any unmatched path, so the invite copy
+  // is chosen here rather than server-side.
+  var isInvite = location.pathname.indexOf('/invite/') === 0;
+  document.getElementById(isInvite ? 'invite' : 'generic').classList.remove('hidden');
 </script>
 </body>
 </html>
